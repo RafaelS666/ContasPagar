@@ -1,0 +1,21 @@
+Function CBValor(CodigoBarras As String) As Currency
+''''''''''''
+' (String) --> (Currency)
+' Retorna o campo valor de um código de barras
+''''''''''''
+    If Left(CodigoBarras, 1) = "8" Then
+            ''''''''''''''''''
+            ' Verifica se o boleto é pagamento de concessão pública como água, luz ou telefonia
+            ' Campo banco = 8XX , XX específico para cada operadora
+            ''''''''''''''''''
+            Valor = Mid(CodigoBarras, 6, 10)
+        Else
+            Valor = Mid(CodigoBarras, 10, 10)
+      End If
+    If Valor = 0 Then
+            CBValor = InputBox("Valor a pagar que consta no boleto" & vbNewLine & "Com centavos, separado por virgulas", "VALOR BOLETO")
+        Else
+            CBValor = Valor / 100
+    End If
+    
+End Function
