@@ -1,0 +1,55 @@
+Function CBBanco(CodigoBarras As String) As Integer
+''''''''''''
+' (String) --> (Integer)
+' Retorna o campo Banco de um código de barras
+''''''''''''
+    CBBanco = Left(CodigoBarras, 3)
+End Function
+
+Function CBMoeda(CodigoBarras As String) As Integer
+''''''''''''
+' (String) --> (Integer)
+' Retorna o campo Moeda de um código de barras
+''''''''''''
+    CBMoeda = Mid(CodigoBarras, 4, 1)
+End Function
+
+Function CBDigitoV(CodigoBarras As String) As Integer
+''''''''''''
+' (String) --> (Integer)
+' Retorna o campo Digito Verificador de um código de barras
+''''''''''''
+    CBDigitoV = Mid(CodigoBarras, 5, 1)
+End Function
+
+Function CBDataS(CodigoBarras As String) As Integer
+''''''''''''
+' (String) --> (Integer)
+' Retorna o campo data de um código de barras
+''''''''''''
+    CBDataS = Mid(CodigoBarras, 6, 4)
+     If CBDataS = 0 Then
+        CBDataS = InputBox("Data de vencimento que consta no boleto", "DATA BOLETO")
+    End If
+End Function
+
+Function CBValor(CodigoBarras As String) As Long
+''''''''''''
+' (String) --> (Long)
+' Retorna o campo valor de um código de barras
+''''''''''''
+    Dim Valor As String
+    If Left(CodigoBarras, 1) = "8" Then
+            ''''''''''''''''''
+            ' Verifica se o boleto é pagamento de concessão pública como água, luz ou telefonia
+            ' Campo banco = 8XX , XX específico para cada operadora
+            ''''''''''''''''''
+            CBValor = Mid(CodigoBarras, 6, 10)
+        Else
+            CBValor = Mid(CodigoBarras, 10, 10)
+      End If
+    If CBValor = 0 Then
+        CBValor = InputBox("Valor a pagar que consta no boleto" & vbNewLine & "Com centavos, sem virgulas" & vbNewLine & vbNewLine & "Exemplo: se   R$ 475,20" & vbNewLine & "Digitar      47520", "VALOR BOLETO")
+    End If
+    
+End Function
