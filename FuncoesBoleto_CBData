@@ -1,0 +1,13 @@
+Function CBData(CodigoBarras As String) As Date
+''''''''''''
+' (String) --> (Date)
+' Retorna o campo data de um código de barras
+''''''''''''
+    Dim DRef As Date
+    DRef = #2/24/2014#
+    CBDataS = Mid(CodigoBarras, 6, 4)
+    If CBDataS = 0 Then
+        CBDataS = InputBox("Data de vencimento que consta no boleto", "DATA BOLETO")
+    End If
+    CBData = DRef + (CBDataS - 5984)
+End Function
