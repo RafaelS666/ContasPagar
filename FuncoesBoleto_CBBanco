@@ -1,0 +1,255 @@
+Function CBBanco(CodigoBarras As String) As String
+''''''''''''
+' (String) --> (String)
+' Retorna o nome do Banco de um código de barras
+' Fonte: http://www.febraban.org.br/arquivo/bancos/sitebancos2-0.asp em 13/02/2015
+''''''''''''
+CBBancoS = Left(CodigoBarras, 3)
+
+If Left(CBBancoS, 1) = "8" Then
+            ''''''''''''''''''
+            ' Verifica se o boleto é pagamento de concessão pública como água, luz ou telefonia
+            ' Campo banco = 8XY
+            ' X Identificador de Segmento
+            ' Y Identificador de Valor Efetivo ou Referência
+            ' Fonte: http://www.bb.com.br/docs/pub/emp/mpe/dwn/PadraoCodigoBarras.pdf em 13/02/2015
+            ''''''''''''''''''
+            D2 = Mid(CBBancoS, 2, 1)
+            D3 = Mid(CBBancoS, 3, 1)
+            Select Case D2
+                Case 1
+                    CBBanco = "Prefeituras"
+                Case 2
+                    CBBanco = "Saneamento"
+                Case 3
+                    CBBanco = "Energia Elétrica e Gás"
+                Case 4
+                    CBBanco = "Telecomunicações"
+                Case 5
+                    CBBanco = "Órgãos Governamentais"
+                Case 6
+                    CBBanco = "Carnes e Assemelhados ou demais Empresas / Órgãos que serão identificadas através do CNPJ"
+                Case 7
+                    CBBanco = "Multas de trânsito"
+                Case 9
+                    CBBanco = "Uso exclusivo do banco"
+            End Select
+
+            Select Case D3
+                Case 6
+                    S3 = "Valor a ser cobrado efetivamente em reais  com dígito verificador calculado pelo módulo 10 na quarta posição do Código de Barras e valor com 11 posições (versão 2 e posteriores) sem qualquer alteração;"
+                Case 7
+                    S3 = "Quantidade de moeda; Zeros – somente na impossibilidade de utilizar o valor; Valor a ser reajustado por um índice com dígito .verificador calculado pelo módulo 10 na quarta posição do Código de Barras e valor com 11 posições (versão 2 e posteriores)."
+                Case 8
+                    S3 = "Valor a ser cobrado efetivamente em reais com dígito verificador calculado pelo módulo 11 na quarta posição do Código de Barras e valor com 11 posições (versão 2 e posteriores) sem qualquer alteração."
+                Case 9
+                    S3 = "Quantidade de moeda Zeros – somente na impossibilidade de utilizar o valor;Valor a ser reajustado por um índice com dígito .verificador calculado pelo módulo 11 na quarta posição do Código de Barras e valor com 11 posições (versão 2 eposteriores)."
+            End Select
+            End If
+            
+    
+    Select Case CBBancoS
+        Case 0
+           CBBanco = "Banco Bankpar S.A."
+        Case 1
+           CBBanco = "Banco do Brasil S.A."
+        Case 3
+           CBBanco = "Banco da Amazônia S.A."
+        Case 4
+           CBBanco = "Banco do Nordeste do Brasil S.A."
+        Case 12
+           CBBanco = "Banco Standard de Investimentos S.A."
+        Case 21
+           CBBanco = "BANESTES S.A. Banco do Estado do Espírito Santo"
+        Case 24
+           CBBanco = "Banco de Pernambuco S.A. - BANDEPE"
+        Case 25
+           CBBanco = "Banco Alfa S.A."
+        Case 29
+           CBBanco = "Banco Banerj S.A."
+        Case 31
+           CBBanco = "Banco Beg S.A."
+        Case 33
+           CBBanco = "Banco Santander (Brasil) S.A."
+        Case 36
+           CBBanco = "Banco Bradesco BBI S.A."
+        Case 37
+           CBBanco = "Banco do Estado do Pará S.A."
+        Case 40
+           CBBanco = "Banco Cargill S.A."
+        Case 41
+           CBBanco = "Banco do Estado do Rio Grande do Sul S.A."
+        Case 45
+           CBBanco = "Banco Opportunity S.A."
+        Case 47
+           CBBanco = "Banco do Estado de Sergipe S.A."
+        Case 62
+           CBBanco = "Hipercard Banco Múltiplo S.A."
+        Case 63
+           CBBanco = "Banco Ibi S.A. Banco Múltiplo"
+        Case 64
+           CBBanco = "Goldman Sachs do Brasil Banco Múltiplo S.A."
+        Case 65
+           CBBanco = "Banco Bracce S.A."
+        Case 69
+           CBBanco = "BPN Brasil Banco Múltiplo S.A."
+        Case 70
+           CBBanco = "BRB - Banco de Brasília S.A."
+        Case 72
+           CBBanco = "Banco Rural Mais S.A."
+        Case 73
+           CBBanco = "BB Banco Popular do Brasil S.A."
+        Case 74
+           CBBanco = "Banco J. Safra S.A."
+        Case 78
+           CBBanco = "BES Investimento do Brasil S.A.-Banco de Investimento"
+        Case 79
+           CBBanco = "Banco Original do Agronegócio S.A."
+        Case 95
+           CBBanco = "Banco Confidence de Câmbio S.A."
+        Case 96
+           CBBanco = "Banco BM&FBOVESPA de Serviços de Liquidação e Custódia S.A"
+        Case 104
+           CBBanco = "Caixa Econômica Federal"
+        Case 107
+           CBBanco = "Banco BBM S.A."
+        Case 119
+           CBBanco = "Banco Western Union do Brasil S.A."
+        Case 125
+           CBBanco = "Brasil Plural S.A. - Banco Múltiplo"
+        Case 184
+           CBBanco = "Banco Itaú BBA S.A."
+        Case 204
+           CBBanco = "Banco Bradesco Cartões S.A."
+        Case 208
+           CBBanco = "Banco BTG Pactual S.A."
+        Case 214
+           CBBanco = "Banco Dibens S.A."
+        Case 215
+           CBBanco = "Banco Comercial e de Investimento Sudameris S.A."
+        Case 217
+           CBBanco = "Banco John Deere S.A."
+        Case 218
+           CBBanco = "Banco Bonsucesso S.A."
+        Case 222
+           CBBanco = "Banco Credit Agricole Brasil S.A."
+        Case 224
+           CBBanco = "Banco Fibra S.A."
+        Case 230
+           CBBanco = "Unicard Banco Múltiplo S.A."
+        Case 233
+           CBBanco = "Banco Cifra S.A."
+        Case 237
+           CBBanco = "Banco Bradesco S.A."
+        Case 246
+           CBBanco = "Banco ABC Brasil S.A."
+        Case 248
+           CBBanco = "Banco Boavista Interatlântico S.A."
+        Case 249
+           CBBanco = "Banco Investcred Unibanco S.A."
+        Case 250
+           CBBanco = "BCV - Banco de Crédito e Varejo S.A."
+        Case 263
+           CBBanco = "Banco Cacique S.A."
+        Case 265
+           CBBanco = "Banco Fator S.A."
+        Case 318
+           CBBanco = "Banco BMG S.A."
+        Case 320
+           CBBanco = "Banco Industrial e Comercial S.A."
+        Case 341
+           CBBanco = "Itaú Unibanco S.A."
+        Case 356
+           CBBanco = "Banco Real S.A."
+        Case 366
+           CBBanco = "Banco Société Générale Brasil S.A."
+        Case 370
+           CBBanco = "Banco Mizuho do Brasil S.A."
+        Case 376
+           CBBanco = "Banco J. P. Morgan S.A."
+        Case 389
+           CBBanco = "Banco Mercantil do Brasil S.A."
+        Case 394
+           CBBanco = "Banco Bradesco Financiamentos S.A."
+        Case 394
+           CBBanco = "Banco Finasa BMC S.A."
+        Case 399
+           CBBanco = "HSBC Bank Brasil S.A. - Banco Múltiplo"
+        Case 409
+           CBBanco = "UNIBANCO - União de Bancos Brasileiros S.A."
+        Case 422
+           CBBanco = "Banco Safra S.A."
+        Case 453
+           CBBanco = "Banco Rural S.A."
+        Case 456
+           CBBanco = "Banco de Tokyo-Mitsubishi UFJ Brasil S.A."
+        Case 464
+           CBBanco = "Banco Sumitomo Mitsui Brasileiro S.A."
+        Case 473
+           CBBanco = "Banco Caixa Geral - Brasil S.A."
+        Case 477
+           CBBanco = "Citibank S.A."
+        Case 479
+           CBBanco = "Banco ItaúBank S.A"
+        Case 487
+           CBBanco = "Deutsche Bank S.A. - Banco Alemão"
+        Case 488
+           CBBanco = "JPMorgan Chase Bank"
+        Case 492
+           CBBanco = "ING Bank N.V."
+        Case 505
+           CBBanco = "Banco Credit Suisse (Brasil) S.A."
+        Case 600
+           CBBanco = "Banco Luso Brasileiro S.A."
+        Case 604
+           CBBanco = "Banco Industrial do Brasil S.A."
+        Case 610
+           CBBanco = "Banco VR S.A."
+        Case 611
+           CBBanco = "Banco Paulista S.A."
+        Case 612
+           CBBanco = "Banco Guanabara S.A."
+        Case 623
+           CBBanco = "Banco Panamericano S.A."
+        Case 626
+           CBBanco = "Banco Ficsa S.A."
+        Case 633
+           CBBanco = "Banco Rendimento S.A."
+        Case 634
+           CBBanco = "Banco Triângulo S.A."
+        Case 641
+           CBBanco = "Banco Alvorada S.A."
+        Case 643
+           CBBanco = "Banco Pine S.A."
+        Case 652
+           CBBanco = "Itaú Unibanco Holding S.A."
+        Case 653
+           CBBanco = "Banco Indusval S.A."
+        Case 655
+           CBBanco = "Banco Votorantim S.A."
+        Case 707
+           CBBanco = "Banco Daycoval S.A."
+        Case 719
+           CBBanco = "Banif-Banco Internacional do Funchal (Brasil)S.A."
+        Case 739
+           CBBanco = "Banco BGN S.A."
+        Case 740
+           CBBanco = "Banco Barclays S.A."
+        Case 745
+           CBBanco = "Banco Citibank S.A."
+        Case 746
+           CBBanco = "Banco Modal S.A."
+        Case 747
+           CBBanco = "Banco Rabobank International Brasil S.A."
+        Case 748
+           CBBanco = "Banco Cooperativo Sicredi S.A."
+        Case 749
+           CBBanco = "Banco Simples S.A."
+        Case 751
+           CBBanco = "Scotiabank Brasil S.A. Banco Múltiplo"
+        Case 752
+           CBBanco = "Banco BNP Paribas Brasil S.A."
+        Case 755
+           CBBanco = "Bank of America Merrill Lynch Banco Múltiplo S.A."
+    End Select
+End Function
